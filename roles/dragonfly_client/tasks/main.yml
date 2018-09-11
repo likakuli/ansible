@@ -1,7 +1,7 @@
 - name: 下载在线安装包
   copy:
       dest: /root
-      src: {{ version }}/{{ fileName }}
+      src: "{{ version }}/{{ fileName }}"
 
 - name: 解压
   unarchive:
