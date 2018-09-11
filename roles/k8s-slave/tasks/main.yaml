@@ -14,7 +14,7 @@
 - name: add dragonfly config file
   copy: 
       dest: /etc
-      src: gragonfly.conf
+      src: dragonfly.conf
 
 - name: copy file
   copy:
