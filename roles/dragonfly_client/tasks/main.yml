@@ -1,0 +1,20 @@
+- name: 下载在线安装包
+  get_url:
+      dest: "/root" # required. Absolute path of where to download the file to.,If C(dest) is a directory, either the server provided filename or, if none provided, the base name of the URL on the remote server will be used. If a directory, C(force) has no effect.,If C(dest) is a directory, the file will always be downloaded (regardless of the C(force) option), but replaced only if the contents changed..
+      url:  {{ download_url }}# required. HTTP, HTTPS, or FTP URL in the form (http|https|ftp)://[user[:pass]]@host.domain[:port]/path
+
+- name: 解压
+  unarchive:
+      src: /root/{{ fileName }} # required. If C(remote_src=no) (default), local path to archive file to copy to the target server; can be absolute or relative. If C(remote_src=yes), path on the target server to existing archive file to unpack.,If C(remote_src=yes) and C(src) contains C(://), the remote machine will download the file from the URL first. (version_added 2.0). This is only for simple cases, for full download support use the M(get_url) module.
+      dest: /root # required. Remote absolute path where the archive should be unpacked.
+
+- name: 设置环境变量
+  lineinfile:
+      path: ~/.bashrc
+      line: PATH=$PATH:{{ folderName }}/df-client
+
+- name: 使环境变量生效
+  shell: source ~/.bashrc
+
+- name: 开启df-daemon
+  shell: nohup df-daemon --registry http://10.0.13.19 &

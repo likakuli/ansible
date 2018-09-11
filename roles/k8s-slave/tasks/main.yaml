@@ -1,0 +1,23 @@
+- name: update docker daemon
+  shell: echo {{ daemon_json }} > /etc/docker/daemon.json
+
+- name: add docker proxy directory
+  file:
+      path: /etc/systemd/system/docker.service.d # required. path to the file being managed.  Aliases: I(dest), I(name)
+      state: directory # not required. choices: absent;directory;file;hard;link;touch. If C(directory), all intermediate subdirectories will be created if they do not exist. Since Ansible 1.7 they will be created with the supplied permissions. If C(file), the file will NOT be created if it does not exist; see the C(touch) value or the M(copy) or M(template) module if you want that behavior.  If C(link), the symbolic link will be created or changed. Use C(hard) for hardlinks. If C(absent), directories will be recursively deleted, and files or symlinks will be unlinked. Note that C(absent) will not cause C(file) to fail if the C(path) does not exist as the state did not change. If C(touch) (new in 1.4), an empty file will be created if the C(path) does not exist, while an existing file or directory will receive updated file access and modification times (similar to the way `touch` works from the command line).
+
+- name: add dragonfly config file
+  copy: 
+      dest: /etc
+      src: gragonfly.conf
+
+- name: copy file
+  copy:
+      dest: /etc/systemd/system/docker.service.d # required. Remote absolute path where the file should be copied to. If I(src) is a directory, this must be a directory too. If I(dest) is a nonexistent path and if either I(dest) ends with "/" or I(src) is a directory, I(dest) is created. If I(src) and I(dest) are files, the parent directory of I(dest) isn't created: the task fails if it doesn't already exist.
+      src: http_proxy.conf # not required. Local path to a file to copy to the remote server; can be absolute or relative. If path is a directory, it is copied recursively. In this case, if path ends with "/", only inside contents of that directory are copied to destination. Otherwise, if it does not end with "/", the directory itself with all contents is copied. This behavior is similar to Rsync.
+
+- name: daemon reload
+  systemd:
+      daemon_reload: true
+      state: restarted
+      name: docker
