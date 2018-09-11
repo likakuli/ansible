@@ -1,5 +1,10 @@
 - name: update docker daemon
-  shell: echo {{ daemon_json }} > /etc/docker/daemon.json
+  shell: rm -f /etc/docker/daemon.json
+
+- name: copy docker daemon config
+  copy:
+      src: daemon.json
+      dest: /etc/docker
 
 - name: add docker proxy directory
   file:

@@ -16,5 +16,5 @@
 - name: 使环境变量生效
   shell: source ~/.bashrc
 
-- name: 开启df-daemon
-  shell: nohup df-daemon --registry http://10.0.13.19 &
+- name: 开启dfdaemon
+  shell: nohup dfdaemon --registry http://10.0.13.19 &

@@ -1,0 +1,1 @@
+{"disable-legacy-registry":false,"graph":"/data/docker","insecure-registries":["10.254.0.0/16","mirror.kce.sdns.ksyun.com","10.0.13.19"],"registry-mirrors":["http://mirror.kce.sdns.ksyun.com"]}
