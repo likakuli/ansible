@@ -26,3 +26,9 @@
       daemon_reload: true
       state: restarted
       name: docker
+
+- name: docker login
+  docker_login:
+      username: admin # required. The username for the registry account
+      password: 123123123 # required. The plaintext password for the registry account
+      docker_host: 10.0.13.19 # not required. The URL or Unix socket path used to connect to the Docker API. To connect to a remote host, provide the TCP connection string. For example, 'tcp://192.0.2.23:2376'. If TLS is used to encrypt the connection, the module will automatically replace 'tcp' in the connection URL with 'https'.
