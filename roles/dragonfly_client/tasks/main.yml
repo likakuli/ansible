@@ -11,10 +11,10 @@
 - name: 设置环境变量
   lineinfile:
       path: ~/.bashrc
-      line: PATH=$PATH:{{ folderName }}
+      line: PATH=$PATH:/root/{{ folderName }}
 
 - name: 使环境变量生效
   shell: source ~/.bashrc
 
 - name: 开启dfdaemon
-  shell: nohup dfdaemon --registry http://10.0.13.19 &
+  shell: nohup df-daemon --registry http://10.0.13.19 &
