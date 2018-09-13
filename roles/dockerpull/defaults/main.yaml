@@ -1,1 +1,3 @@
 file: bigimage.sh  #tensorflow.sh
+image: bigimage:v1.0 #tensorflow:1.10
+waittime: 120
